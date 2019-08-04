@@ -4,7 +4,7 @@ sudo: require
 dist: xenial
 
 install:
-  - sudo apt-get -y install cmake curl xorg-dev libglu1-mesa-dev freeglut3-dev gdb jq libasound-dev libasound2-dev libgl1-mesa-dev libglew-dev libglu1-mesa-dev libgtk2.0-dev libjack-jackd2-dev libjansson-dev libx11-dev libxcursor-dev libxi-dev libxinerama-dev libxrandr-dev libzip-dev mesa-common-dev zlib1g-dev libglfw3-dev libpulse-dev
+  - sudo apt-get -y install cmake curl xorg-dev libglu1-mesa-dev freeglut3-dev gdb jq libasound-dev libasound2-dev libgl1-mesa-dev libglew-dev libglu1-mesa-dev libgtk2.0-dev libjack-jackd2-dev libjansson-dev libx11-dev libxcursor-dev libxi-dev libxinerama-dev libxrandr-dev libzip-dev mesa-common-dev zlib1g-dev libglfw3-dev
 
 script:
   # Build Rack
