@@ -14,17 +14,9 @@ script:
   - make -j$(nproc)
   - sudo make -j$(nproc) install
   - cd ..
-  # Continue as per the documentation
+  # Build Rack
+  - git submodule update --init --recursive
   - sed -i -e 's|--with-jack|--without-jack|g' dep/Makefile
-  - git submodule update --init --recursive
-  - cd plugins/
-  - git clone https://github.com/VCVRack/Fundamental
-  - cd Fundamental
-  - git submodule update --init --recursive
-  - make dep -j$(nproc)
-  - make -j$(nproc)
-  - make dist
-  - cd ../../
   - make dep -j$(nproc)
   - make -j$(nproc)
   # make INSTALL_ROOT=appdir -j$(nproc) install ; find appdir/ # https://github.com/VCVRack/Rack/issues/1515
@@ -32,7 +24,17 @@ script:
   - mkdir -p appdir/usr/share/icons/512x512/apps ; cp res/icon.png appdir/usr/share/icons/512x512/apps/rack.png # FIXME, see above
   - mkdir -p appdir/usr/share/applications/ ; cp res/rack.desktop appdir/usr/share/applications/ # FIXME, see above
   - cp -r res/ appdir/usr/ # FIXME, see above; normally this should go to appdir/usr/share/rack/
-  - find ../ -name 'Fundamental.zip' -exec cp {} ./appdir/usr/ \;
+  - find appdir/
+  # Only then can we build the plugins
+  - cd plugins/
+  - git clone https://github.com/VCVRack/Fundamental
+  - cd Fundamental
+  - git submodule update --init --recursive
+  - make dep -j$(nproc)
+  - make -j$(nproc)
+  - make dist
+  - cd ../
+  - find . -name 'Fundamental.zip' -exec cp {} ./appdir/usr/ \;
   - wget -c -nv "https://github.com/AppImage/AppImageKit/releases/download/continuous/AppRun-x86_64" -O ./appdir/AppRun ; chmod +x ./appdir/AppRun # FIXME: Would not be needed if res was loaded from a path relative to the mani binary
   - wget -c -nv "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage"
   - chmod a+x linuxdeployqt-continuous-x86_64.AppImage
