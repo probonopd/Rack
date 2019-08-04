@@ -4,7 +4,7 @@ sudo: require
 dist: xenial
 
 install:
-  - sudo apt-get -y install gdb curl cmake libx11-dev libglu1-mesa-dev libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev zlib1g-dev libasound2-dev libgtk2.0-dev libjack-jackd2-dev jq libjansson-dev libglew-dev
+  - sudo apt-get -y install cmake curl freeglut3-dev gdb jq libasound-dev libasound2-dev libgl1-mesa-dev libglew-dev libglu1-mesa-dev libgtk2.0-dev libjack-jackd2-dev libjansson-dev libx11-dev libxcursor-dev libxi-dev libxinerama-dev libxrandr-dev libzip-dev mesa-common-dev zlib1g-dev
 
 script:
   - git submodule update --init --recursive
