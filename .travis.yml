@@ -7,6 +7,14 @@ install:
   - sudo apt-get -y install gdb curl cmake libx11-dev libglu1-mesa-dev libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev zlib1g-dev libasound2-dev libgtk2.0-dev libjack-jackd2-dev jq
 
 script:
+  - cd ..
+  - git clone https://github.com/VCVRack/Fundamental
+  - cd Fundamental
+  - git submodule update --init --recursive
+  - make dep -j$(nproc)
+  - make -j$(nproc)
+  - make dist
+  - cd ../Rack
   - git submodule update --init --recursive
   - make dep -j$(nproc)
   - make -j$(nproc)
@@ -15,6 +23,7 @@ script:
   - mkdir -p appdir/usr/share/icons/512x512/apps ; cp res/icon.png appdir/usr/share/icons/512x512/apps/rack.png # FIXME, see above
   - mkdir -p appdir/usr/share/applications/ ; cp res/rack.desktop appdir/usr/share/applications/ # FIXME, see above
   - cp -r res/ appdir/usr/ # FIXME, see above; normally this should go to appdir/usr/share/rack/
+  - find ../ -name 'Fundamental.zip' -exec cp {} ./appdir/usr/ \;
   - wget -c -nv "https://github.com/AppImage/AppImageKit/releases/download/continuous/AppRun-x86_64" -O ./appdir/AppRun ; chmod +x ./appdir/AppRun # FIXME: Would not be needed if res was loaded from a path relative to the mani binary
   - wget -c -nv "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage"
   - chmod a+x linuxdeployqt-continuous-x86_64.AppImage
