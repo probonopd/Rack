@@ -16,7 +16,6 @@ script:
   - make -j$(nproc)
   - make dist
   - cd ../../
-  - ./configure -with-pulse
   - make dep -j$(nproc)
   - make -j$(nproc)
   # make INSTALL_ROOT=appdir -j$(nproc) install ; find appdir/ # https://github.com/VCVRack/Rack/issues/1515
