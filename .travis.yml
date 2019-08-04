@@ -15,6 +15,7 @@ script:
   - sudo make -j$(nproc) install
   - cd ..
   # Continue as per the documentation
+  - sed -i -e 's|--with-jack|--without-jack|g' dep/Makefile
   - git submodule update --init --recursive
   - cd plugins/
   - git clone https://github.com/VCVRack/Fundamental
