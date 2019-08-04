@@ -14,6 +14,7 @@ script:
   - mkdir -p appdir/usr/bin ; cp Rack appdir/usr/bin/rack ; strip appdir/usr/bin/rack # FIXME, see above
   - mkdir -p appdir/usr/share/icons/512x512/apps ; cp res/icon.png appdir/usr/share/icons/512x512/apps/rack.png # FIXME, see above
   - mkdir -p appdir/usr/share/applications/ ; cp res/rack.desktop appdir/usr/share/applications/ # FIXME, see above
+  - cp -r res/ appdir/usr/bin/ # FIXME, see above; normally this should go to appdir/usr/share/rack/
   - wget -c -nv "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage"
   - chmod a+x linuxdeployqt-continuous-x86_64.AppImage
   - ./linuxdeployqt-continuous-x86_64.AppImage appdir/usr/share/applications/*.desktop -appimage
