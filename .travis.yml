@@ -7,15 +7,15 @@ install:
   - sudo apt-get -y install gdb curl cmake libx11-dev libglu1-mesa-dev libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev zlib1g-dev libasound2-dev libgtk2.0-dev libjack-jackd2-dev jq
 
 script:
-  - cd ..
   - git clone https://github.com/VCVRack/Fundamental
-  - cd Fundamental
   - git submodule update --init --recursive
+  - cd Fundamental
+  # git submodule update --init --recursive
   - make dep -j$(nproc)
   - make -j$(nproc)
   - make dist
-  - cd ../Rack
-  - git submodule update --init --recursive
+  - cd ../
+  - ./configure -with-pulse
   - make dep -j$(nproc)
   - make -j$(nproc)
   # make INSTALL_ROOT=appdir -j$(nproc) install ; find appdir/ # https://github.com/VCVRack/Rack/issues/1515
