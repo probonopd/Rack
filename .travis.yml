@@ -34,7 +34,7 @@ script:
   - make -j$(nproc)
   - make dist
   - cd ../../
-  - find . -name 'Fundamental.zip' -exec cp {} ./appdir/usr/ \;
+  - find . -name 'Fundamental*.zip' -exec cp {} ./appdir/usr/ \;
   - wget -c -nv "https://github.com/AppImage/AppImageKit/releases/download/continuous/AppRun-x86_64" -O ./appdir/AppRun ; chmod +x ./appdir/AppRun # FIXME: Would not be needed if res was loaded from a path relative to the mani binary
   - wget -c -nv "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage"
   - chmod a+x linuxdeployqt-continuous-x86_64.AppImage
